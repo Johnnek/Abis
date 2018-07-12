@@ -1,8 +1,17 @@
 Damit das Beispiel funktioniert, muss eine Datenbank xdb eingerichtet werden.
 Das Einrichten der Datenbank ist im Skript beschrieben.
 
-Falls Sie ein anderes Datenbanksystem als Apache Derby alias JavaDB verwenden, müssen
-Sie Zeile 20 und 21 in KundeDAO anpassen. Falls Ihre Datenbank nicht xdb heisst, müssen
+Falls Sie ein anderes Datenbanksystem als Apache Derby alias JavaDB verwenden, mï¿½ssen
+Sie Zeile 20 und 21 in KundeDAO anpassen. Falls Ihre Datenbank nicht xdb heisst, mï¿½ssen
 Sie Zeile 21 in KundeDAO anpassen.
 
-Weiterhin müssen Sie den für die von Ihnen verwendete JDBC-Treiber zum Projekt hinzufügen.
+Weiterhin mï¿½ssen Sie den fï¿½r die von Ihnen verwendete JDBC-Treiber zum Projekt hinzufï¿½gen.
+
+
+in der workbench in sql:
+
+use xdb;
+create table Kunden(
+KDNR Integer Primary Key,
+Name Varchar(30),
+KDGRP Integer)

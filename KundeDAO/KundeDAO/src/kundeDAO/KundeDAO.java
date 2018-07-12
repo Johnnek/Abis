@@ -18,7 +18,7 @@ public class KundeDAO {
         try {
 
         	Class.forName("com.mysql.jdbc.Driver");
-            db = DriverManager.getConnection("jdbc:mysql://localhost:3306/xdb?usr=abis&password=abis");
+            db = DriverManager.getConnection("jdbc:mysql://localhost:3306/xdb?user=abis&password=abis");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
