@@ -12,7 +12,7 @@ public abstract class FrameworkDAO {
 	
 	//private static FrameworkDAO instance = new FrameworkDAO();
 	
-	protected void getConnection() {
+	public void getConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			db = DriverManager.getConnection("jdbc:mysql://localhost:3306/xdb?user=abis&password=abis");
@@ -95,7 +95,7 @@ public abstract class FrameworkDAO {
 		try {
 		deleteStatement = db.prepareStatement(deleteStatement());
 		deleteStatement.setLong(1, o.getKey());
-		deleteStatement.executeQuery();
+		deleteStatement.execute();
 		cache.remove(o.getKey());
 		}catch(Exception e) {
 			e.printStackTrace();
