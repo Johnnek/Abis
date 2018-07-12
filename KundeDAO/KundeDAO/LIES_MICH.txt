@@ -1,0 +1,8 @@
+Damit das Beispiel funktioniert, muss eine Datenbank xdb eingerichtet werden.
+Das Einrichten der Datenbank ist im Skript beschrieben.
+
+Falls Sie ein anderes Datenbanksystem als Apache Derby alias JavaDB verwenden, müssen
+Sie Zeile 20 und 21 in KundeDAO anpassen. Falls Ihre Datenbank nicht xdb heisst, müssen
+Sie Zeile 21 in KundeDAO anpassen.
+
+Weiterhin müssen Sie den für die von Ihnen verwendete JDBC-Treiber zum Projekt hinzufügen.
