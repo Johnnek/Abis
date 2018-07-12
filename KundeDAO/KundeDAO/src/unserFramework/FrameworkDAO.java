@@ -3,10 +3,12 @@ package unserFramework;
 import java.sql.*;
 import java.util.*;
 
+import ArtikelDAO.Artikel;
+
 public abstract class FrameworkDAO {
 
-	private HashMap<Long, Object> cache = new HashMap<Long,Object>();
-	private Connection db;
+	protected HashMap<Long, T> cache = new HashMap<Long, T>();
+	protected Connection db;
 	
 	//private static FrameworkDAO instance = new FrameworkDAO();
 	
@@ -20,18 +22,21 @@ public abstract class FrameworkDAO {
 		}
 	}
 	
-//	private static FrameworkDAO getInstance() {
-//		return instance;
-//	}
+	//ToDo
+	/*
+	 * T ist unsere abstrakte Klasse als Vorlage für z.B. ein Artikel oder Kunde, 
+	 * welche immer ein primaryKey(Long) besitzt.
+	*/
 	
-	protected abstract Object getInstance();
+	//getInstance() für spezifische Klasse
+	//public abstract Object getInstance();
 	
 	//Insert
 	protected abstract String insertStatement();
 	
-	protected void create(T o)throws SQLException {
-		Long id = getKey(o);
-		if(cache.containsKey(o) ) throw new SQLException("schluessel" + getKey(o) + "bei insert schon in DB enthalten");
+	public void create(T o)throws SQLException {
+		Long id = o.getKey();
+		if(cache.containsKey(o) ) throw new SQLException("schluessel" + o.getKey() + "bei insert schon in DB enthalten");
 		cache.put(doInsert(o), o);
 	}
 	
@@ -40,8 +45,8 @@ public abstract class FrameworkDAO {
 	//Read
 	protected abstract String findStatement();
 	
-	protected Object read(long pK)throws SQLException {
-		Object result = (Object)cache.get(pK);
+	public T read(long pK)throws SQLException{
+		T result = (T)cache.get(pK);
 		
 		if(result != null)
 			return result;
@@ -53,30 +58,30 @@ public abstract class FrameworkDAO {
 			findStatement.setLong(1,  pK);
 			ResultSet rs = findStatement.executeQuery();
 			rs.next();
-			result = load(rs);
+			result = (T)load(rs);
 			return result;
 		}catch(SQLException e) {
 			throw new SQLException("Fehler bei abstractFind. " + e.toString());
 		}
 	}
 	
-	private Object load(ResultSet rs)throws SQLException {
+	protected Object load(ResultSet rs)throws SQLException{
 		Long pK = new Long(rs.getLong(1));
 		if(cache.containsKey(pK))
 			return cache.get(pK);
-		Object result = doLoad(pK, rs);
+		T result = doLoad(pK, rs);
 		cache.put(pK, result);
 		return result;
 	}
 	
-	protected abstract Object doLoad(Long pK, ResultSet rs)throws SQLException;
+	protected abstract T doLoad(Long pK, ResultSet rs)throws SQLException;
 	
 	
 	//Update
 	protected abstract String updateStatement();
 	
-	private void update(T o) throws SQLException{
-		if(!cache.containsKey(getKey(o))) throw new SQLException ("Schl�ssel " + getKey(o) + "nicht enthalten");
+	public void update(T o) throws SQLException{
+		if(!cache.containsKey(o.getKey())) throw new SQLException ("Schl�ssel " + o.getKey() + "nicht enthalten");
 		cache.put(doUpdate(o), o);
 	}
 	
@@ -85,13 +90,13 @@ public abstract class FrameworkDAO {
 	//Delete
 	protected abstract String deleteStatement();
 	
-	private void delete(T o) {
+	public void delete(T o) {
 		PreparedStatement deleteStatement = null;
 		try {
 		deleteStatement = db.prepareStatement(deleteStatement());
-		deleteStatement.setLong(1, getKey(o));
+		deleteStatement.setLong(1, o.getKey());
 		deleteStatement.executeQuery();
-		cache.remove(getLeKey(o));
+		cache.remove(o.getKey());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
