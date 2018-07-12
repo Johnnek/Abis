@@ -17,8 +17,8 @@ public class KundeDAO {
     private KundeDAO() {
         try {
 
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            db = DriverManager.getConnection("jdbc:derby://localhost:1527/xdb");
+        	Class.forName("com.mysql.jdbc.Driver");
+            db = DriverManager.getConnection("jdbc:mysql://localhost:3306/xdb","abis","abis");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -38,11 +38,11 @@ public class KundeDAO {
     private final static String insertStatementString =
             "INSERT INTO KUNDEN VALUES(?, ?, ?)";
 
-    /** Methode zum Einfügen von Kunden in die DB
-    Eigentlich wird der Schlüssel Kundennummer erst hier
+    /** Methode zum Einfï¿½gen von Kunden in die DB
+    Eigentlich wird der Schlï¿½ssel Kundennummer erst hier
     durch die Datenbank bestimmt. Deshalb wird auch Long
-    zurückgeliefert. Dann wird noch ein entsprechendes Muster
-    benötigt, das einen aktuellen ID zurückliefert.
+    zurï¿½ckgeliefert. Dann wird noch ein entsprechendes Muster
+    benï¿½tigt, das einen aktuellen ID zurï¿½ckliefert.
     Wir haben an dieser Stelle darauf verzichtet und gehen
     davon aus, dass ein eindeutiger ID bei der Anlage des Kunden
     mitgegeben wird. */
