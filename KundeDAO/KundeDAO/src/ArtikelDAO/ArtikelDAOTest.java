@@ -25,11 +25,12 @@ public class ArtikelDAOTest {
 	        System.out.println("Artikel hat jetzt den Preis " + derArtikel.getPreis());
 
 	        // Jetzt wird der Kunde gel�scht
-	 
+	        
 	        artikelDAO.delete(derArtikel);
 	        derArtikel = null;
 	        System.out.println("Versuche den Artikel nach L�schung erneut zu lesen:");
 	        //derArtikel = (Artikel) Artikel.read((long)4711);
 	        System.out.println(derArtikel);
+	        
 }
 }

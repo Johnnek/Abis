@@ -65,6 +65,4 @@ public class ArtikelDAO extends FrameworkDAO {
 	protected String deleteStatement() {
 		return "DELETE FROM artikel WHERE artikelnr = ?";
 	}
-
-	
 }

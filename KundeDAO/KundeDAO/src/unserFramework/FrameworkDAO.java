@@ -21,21 +21,11 @@ public abstract class FrameworkDAO {
 			e.printStackTrace();
 		}
 	}
-	
-	//ToDo
-	/*
-	 * T ist unsere abstrakte Klasse als Vorlage für z.B. ein Artikel oder Kunde, 
-	 * welche immer ein primaryKey(Long) besitzt.
-	*/
-	
-	//getInstance() für spezifische Klasse
-	//public abstract Object getInstance();
-	
+		
 	//Insert
 	protected abstract String insertStatement();
 	
 	public void create(T o)throws SQLException {
-		Long id = o.getKey();
 		if(cache.containsKey(o) ) throw new SQLException("schluessel" + o.getKey() + "bei insert schon in DB enthalten");
 		cache.put(doInsert(o), o);
 	}
