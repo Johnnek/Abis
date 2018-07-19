@@ -28,9 +28,9 @@ public class ArtikelDAOTest {
 	        
 	        artikelDAO.delete(derArtikel);
 	        derArtikel = null;
-	        System.out.println("Versuche den Artikel nach L�schung erneut zu lesen:");
+	        //System.out.println("Versuche den Artikel nach L�schung erneut zu lesen:");
 	        //derArtikel = (Artikel) Artikel.read((long)4711);
-	        System.out.println(derArtikel);
+	        //System.out.println(derArtikel);
 	        
 }
 }
