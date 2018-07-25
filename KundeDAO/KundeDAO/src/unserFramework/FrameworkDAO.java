@@ -3,8 +3,6 @@ package unserFramework;
 import java.sql.*;
 import java.util.*;
 
-import ArtikelDAO.Artikel;
-
 public abstract class FrameworkDAO {
 
 	protected HashMap<Long, T> cache = new HashMap<Long, T>();
@@ -12,19 +10,12 @@ public abstract class FrameworkDAO {
 	
 	//private static FrameworkDAO instance = new FrameworkDAO();
 	
-	public void getConnection() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			db = DriverManager.getConnection("jdbc:mysql://localhost:3306/xdb?user=abis&password=abis");
-			
-		} catch(Exception e){
-			e.printStackTrace();
-		}
-	}
+	public abstract void getConnection();
 		
 	//Insert
 	
 	//nur wenn der Key noch nicht in der HashMap enthalten ist, wird dieser der HashMap hinzugefügt
+	@SuppressWarnings("unlikely-arg-type")
 	public void create(T o)throws SQLException {
 		if(cache.containsKey(o) ) throw new SQLException("schluessel" + o.getKey() + "bei insert schon in DB enthalten");
 		cache.put(doInsert(o), o);

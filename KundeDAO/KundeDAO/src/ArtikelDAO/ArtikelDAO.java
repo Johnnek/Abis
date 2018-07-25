@@ -1,5 +1,6 @@
 package ArtikelDAO;
 
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +11,16 @@ import unserFramework.T;
 public class ArtikelDAO extends FrameworkDAO {
 
 	private static ArtikelDAO instance = new ArtikelDAO();
+	
+	public void getConnection() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			db = DriverManager.getConnection("jdbc:mysql://localhost:3306/xdb?user=abis&password=abis");
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+	}
 	
 	public static ArtikelDAO getInstance() {
 		return instance;
