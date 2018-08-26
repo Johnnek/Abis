@@ -22,7 +22,6 @@ public class Artikel extends T {
 		return this.artikelNummer;
 	}
 	
-	@Override
 	public Long getArtikelNummer() {
 		return this.artikelNummer;
 	}
@@ -32,7 +31,6 @@ public class Artikel extends T {
         artikelDAO.update(this);
     }
 
-	@Override
     public String getBezeichnung() {
         return this.bezeichnung;
     }
@@ -42,7 +40,6 @@ public class Artikel extends T {
         artikelDAO.update(this);
     }
 
-    @Override
     public Double getPreis() {
         return this.preis;
     }
